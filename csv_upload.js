@@ -12,7 +12,8 @@ const doPost = (e) => {
       return createJsonResponse("ファイルが正常に保存されました。", true);
 
     } else if (token === UPLOAD_TOKEN) {
-      const csvData = postData.data.map(row => row[0]).join("\n");
+      // A列とD列のデータをCSV形式で組み立て
+      const csvData = postData.data.map(row => `${row[0]},${row[1]}`).join("\n");
       const filenamePrefix = postData.filenamePrefix;
       const dateTime = formatDate(new Date());
       const fileName = `${filenamePrefix}_${dateTime}.csv`;
